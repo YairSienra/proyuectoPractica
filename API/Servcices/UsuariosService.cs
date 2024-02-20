@@ -1,6 +1,7 @@
 ﻿using Data.DTO;
 using Data.Entities;
 using Data.Managers;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace API.Servcices
@@ -20,7 +21,14 @@ namespace API.Servcices
             return  lista;
         }
 
-        public async Task<bool> Guardar(UsuarioDTO request)
+		public Task<Usuarios> BuscarUsuario(LoginDTO loginDTO)
+		{
+			var usuario = _manager.BuscarUsuario(loginDTO.Email, loginDTO.Password);
+
+            return usuario;
+		}
+
+		public async Task<bool> Guardar(UsuarioDTO request)
         {
             Usuarios usuarios = request;
 

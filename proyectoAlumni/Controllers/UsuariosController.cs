@@ -54,7 +54,7 @@ namespace Web.Controllers
         {
             var baseApi = new BaseApi(_httpClient);
 
-            baseApi.PostUsuario("Usuarios/GuardarUsuario", newUsuario);
+            baseApi.PostToApi("Usuarios/GuardarUsuario", newUsuario);
 
             return View("~/Views/Usuarios/Usuarios.cshtml");
         }
@@ -63,7 +63,7 @@ namespace Web.Controllers
         {
             var baseApi = new BaseApi(_httpClient);
 
-            baseApi.PostUsuario("Usuarios/EliminarUsuario", usuario);
+            baseApi.PostToApi("Usuarios/EliminarUsuario", usuario);
 
             return View("~/Views/Usuarios/Usuarios.cshtml");
         }

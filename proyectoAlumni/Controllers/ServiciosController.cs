@@ -35,7 +35,7 @@ namespace Web.Controllers
         {
             var baseApi = new BaseApi(_httpClient);
 
-            await baseApi.PostUsuario("Servicios/GuardarServicios", serviciosDTO);
+            await baseApi.PostToApi("Servicios/GuardarServicios", serviciosDTO);
 
             return View("~/Views/Servicios/Servicios.cshtml");
         }
@@ -44,7 +44,7 @@ namespace Web.Controllers
         {
             var baseApi = new BaseApi(_httpClient);
 
-            await baseApi.PostUsuario("Servicios/EliminarServicios", serviciosDTO);
+            await baseApi.PostToApi("Servicios/EliminarServicios", serviciosDTO);
 
             return View("~/Views/Servicios/Servicios.cshtml");
         }
