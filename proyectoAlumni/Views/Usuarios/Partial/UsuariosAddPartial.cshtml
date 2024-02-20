@@ -1,0 +1,84 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Web.ViewModels.UsuarioViewModel
+
+<!-- Modal -->
+<div class="modal fade" id="GuardarUsuario">
+    <div class="modal-dialog">
+        <div class="modal-content ">
+            <!-- Encabezado del modal -->
+            <div class="modal-header">
+                <h4 class="modal-title">Agregando usuario</h4>
+                <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Contenido del modal -->
+            <div class="modal-body">
+                @using (Html.BeginForm("GuardarUsuario", "/Usuarios", FormMethod.Post))
+                {
+                    @Html.HiddenFor(model => model.IdUsuario)
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-control-label">Nombre</label>
+                                @Html.EditorFor(x => x.Nombre, new{htmlAttributes = new {@class = "form-control"}})
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-control-label">Apellido</label>
+                                @Html.EditorFor(x => x.Apellido, new{htmlAttributes = new {@class = "form-control"}})
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-control-label">Fecha De Nacimeinto</label>
+                                @Html.EditorFor(x => x.Fecha_Nacimiento, new{htmlAttributes = new {@class = "form-control"}})
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-control-label">Email</label>
+                                @Html.EditorFor(x => x.Mail, new{htmlAttributes = new {@class = "form-control"}})
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-control-label">Password</label>
+                                @Html.EditorFor(x => x.Clave, new{htmlAttributes = new {@class = "form-control"}})
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-control-label">Rol</label>
+                                <select name="Id_Role" id="Id_Role" class="form-control">
+                                    <option value="">Selecciona</option>
+                                    @{
+                                        foreach (var role in Model.ListaDeRoles)
+                                        {
+                                            if(Model.Id_Role != null && role.Value == Model.Id_Role.ToString())
+                                            {
+                                                <option value=@role.Value selected>@role.Text</option>
+                                            }else
+                                            {
+                                                <option value=@role.Value>@role.Text</option>
+                                            };
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-control-label">Activo?</label>
+                                @Html.CheckBoxFor(x => x.Activo, new{htmlAttributes = new {@class = "form-control"}})
+                            </div>
+                        </div>
+                    </div>
+
+                                <!-- Pie del modal -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success">Guardar Usuario</button>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

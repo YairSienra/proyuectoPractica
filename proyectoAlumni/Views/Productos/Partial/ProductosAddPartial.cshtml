@@ -1,0 +1,63 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Web.ViewModels.ProductosViewModel;
+
+<!-- Modal -->
+<div class="modal fade" id="GuardarProductos">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Encabezado del modal -->
+            <div class="modal-header">
+                <h4 class="modal-title">Agregando Producto</h4>
+                <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Contenido del modal -->
+            <div class="modal-body">
+                @using (Html.BeginForm("GuardarProductos", "/Productos", FormMethod.Post, new {enctype="multipart/form-data"}))
+                {
+
+                    @Html.HiddenFor(model => model.IdProducto)
+                     @Html.HiddenFor(model => model.Imagen)
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-control-label">Nombre</label>
+                                @Html.EditorFor(x => x.Descripcion, new{htmlAttributes = new {@class = "form-control"}})
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-control-label">Precio</label>
+                                @Html.EditorFor(x => x.Precio, new{htmlAttributes = new {@class = "form-control"}})
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-control-label">Stock</label>
+                                @Html.EditorFor(x => x.Stock, new{htmlAttributes = new {@class = "form-control"}})
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-control-label">Imagen</label>
+                                @Html.EditorFor(x => x.formFile, new{htmlAttributes = new {@class = "form-control"}})
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-control-label">Activo?</label>
+                                @Html.CheckBoxFor(x => x.Activo, new{htmlAttributes = new {@class = "form-control"}})
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pie del modal -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-success">Guardar Producto</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

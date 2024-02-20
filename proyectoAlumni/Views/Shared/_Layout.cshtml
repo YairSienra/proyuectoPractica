@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProyectoDePracticaTecnologica</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/proyectoAlumni.styles.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/lib/jquery-bootstrap/dist/css/dataTables.bootstrap5.min.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<link href="~/css/site.css" rel="stylesheet">
+
+	<!--Scripts-->
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/jquery-datatable/jquery.dataTables.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/lib/jquery-bootstrap/dist/js/datatables.bootstrap5.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	<script src="~/lib/moment/moment.js" asp-append-version="true"></script>
+	<script src="https://kit.fontawesome.com/bb2019d519.js" crossorigin="anonymous"></script>
+	<script src="~/lib/sweetalert/sweetalert2.min.js"></script>
+
+	@await RenderSectionAsync("Scripts", required: false)
+
+</head>
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="Home.html">
+					<span class="align-middle">Prueba de Mvc</span>
+				</a>
+
+				<ul class="sidebar-nav">
+					<li class="sidebar-header">
+						Pages
+					</li>
+
+					<li class="sidebar-item active">
+						<a class="sidebar-link" asp-controller="Home" asp-action="Home">
+							<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Inicio</span>
+						</a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" asp-controller="Usuarios" asp-action="Usuarios">
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Usuarios</span>
+						</a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" asp-controller="Roles" asp-action="Roles">
+							<i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Roles</span>
+						</a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" asp-controller="Productos" asp-action="Productos">
+							<i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Productos</span>
+						</a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" asp-controller="Servicios" asp-action="Servicios">
+							<i class="align-middle" data-feather="book"></i> <span class="align-middle">Servicios</span>
+						</a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" asp-controller="Chat" asp-action="Chat">
+							<i class="align-middle" data-feather="book"></i> <span class="align-middle">Chat</span>
+						</a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="">
+							<i class="align-middle" data-feather="book"></i> <span class="align-middle">Cerrar Sesion</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+					<i class="hamburger align-self-center"></i>
+				</a>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+					@RenderBody()
+				</div>
+			</main>
+		</div>
+	</div>
+
+</body>
+</html>

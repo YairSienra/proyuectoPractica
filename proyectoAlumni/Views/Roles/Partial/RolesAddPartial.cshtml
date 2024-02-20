@@ -1,0 +1,44 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Web.ViewModels.RolesViewModel;
+
+<!-- Modal -->
+<div class="modal fade" id="GuardarRol">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Encabezado del modal -->
+            <div class="modal-header">
+                <h4 class="modal-title">Agregando Rol</h4>
+                <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Contenido del modal -->
+            <div class="modal-body">
+                @using (Html.BeginForm("GuardarRol", "/Roles", FormMethod.Post))
+                {
+                    @Html.HiddenFor(model => model.IdRole)
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-control-label">Nombre</label>
+                                @Html.EditorFor(x => x.Nombre, new{htmlAttributes = new {@class = "form-control"}})
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-control-label">Activo?</label>
+                                @Html.CheckBoxFor(x => x.Activo, new{htmlAttributes = new {@class = "form-control"}})
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pie del modal -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-success">Guardar Rol</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
