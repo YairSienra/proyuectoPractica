@@ -17,7 +17,7 @@ namespace Data.DTO
         public string Mail { get; set; }
         public int Id_Role { get; set; }
         public int Codigo { get; set; }
-        public string Clave { get; set; }
+        public string Password { get; set; }
         public bool Activo { get; set; }
     }
 }

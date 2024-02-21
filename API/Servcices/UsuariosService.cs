@@ -21,9 +21,9 @@ namespace API.Servcices
             return  lista;
         }
 
-		public Task<Usuarios> BuscarUsuario(LoginDTO loginDTO)
+		public async Task<Usuarios?> BuscarUsuario(LoginDTO loginDTO)
 		{
-			var usuario = _manager.BuscarUsuario(loginDTO.Email, loginDTO.Password);
+			var usuario =  await _manager.BuscarUsuario(loginDTO.Mail, loginDTO.Password);
 
             return usuario;
 		}

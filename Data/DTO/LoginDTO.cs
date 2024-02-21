@@ -8,7 +8,7 @@ namespace Data.DTO
 {
     public class LoginDTO
     {
-        public string? Email { get; set; }
+        public string? Mail { get; set; }
         public string? Password { get; set; }
         public int Code {get;set;}
     }

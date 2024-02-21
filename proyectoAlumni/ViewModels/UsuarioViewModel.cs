@@ -15,7 +15,7 @@ namespace Web.ViewModels
         public string Mail { get; set; }
         public int Id_Role { get; set; }
         public int Codigo { get; set; }
-        public string Clave { get; set; }
+        public string Password { get; set; }
         public bool Activo { get; set; }
         public IEnumerable<SelectListItem> ListaDeRoles { get; set; }
         
@@ -29,7 +29,7 @@ namespace Web.ViewModels
             usuarioViewModel.Fecha_Nacimiento = usuario.Fecha_Nacimiento;
             usuarioViewModel.Mail = usuario.Mail;
             usuarioViewModel.Id_Role = usuario.Id_Role;
-            usuarioViewModel.Clave = usuario.Clave;
+            usuarioViewModel.Password = usuario.Password;
             usuarioViewModel.Activo = usuario.Activo;
 
             return usuarioViewModel;

@@ -17,16 +17,23 @@ namespace Web.Controllers
             return View();
         }
 
-        public async Task<IActionResult> LogginSession(LoginDTO loginDTO)
+        public async Task<IActionResult> Ingresar(LoginDTO loginDTO)
         {
+            object dataLogin;
+
             var baseApi = new BaseApi(_httpClient);
+            var login = await baseApi.PostToApi("Authenticate/Login", loginDTO) as OkObjectResult;
+            var resultLogin = login?.Value == "" ? dataLogin = null : dataLogin = login.Value;
 
-            var login = await baseApi.PostToApi("Aunthenticate/Login", loginDTO);
-
-            if(login == null)
-                return RedirectToAction("Login", "Login");
+            if(dataLogin != null)
+				return View("~/Views/Home/Index.cshtml");
             else
-                return View("~/Views/Home/Index.cshtml");
+			    return RedirectToAction("Login", "Login");  
         }
-    }
+
+		public async Task<IActionResult> CerrarSesion()
+		{
+            return RedirectToAction("Login", "Login");
+		}
+	}
 }
