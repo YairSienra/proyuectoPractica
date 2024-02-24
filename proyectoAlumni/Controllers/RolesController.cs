@@ -42,7 +42,7 @@ namespace Web.Controllers
         {
             var baseApi = new BaseApi(_httpClient);
 
-            baseApi.PostUsuario("Roles/GuardarRol", rolDto);
+            baseApi.PostToApi("Roles/GuardarRol", rolDto);
 
             return View("~/Views/Roles/Roles.cshtml");
         }
@@ -51,7 +51,7 @@ namespace Web.Controllers
         {
             var baseApi = new BaseApi(_httpClient);
 
-            baseApi.PostUsuario("Roles/EliminarRol", rolDto);
+            baseApi.PostToApi("Roles/EliminarRol", rolDto);
 
             return View("~/Views/Roles/Roles.cshtml");
         }

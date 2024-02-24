@@ -19,7 +19,7 @@ namespace Data.Base
         }
 
 
-        public async Task<IActionResult> PostUsuario(string ControllerName, object model)
+        public async Task<IActionResult> PostToApi(string ControllerName, object model)
         {
             var client = _http.CreateClient("useApi");
 

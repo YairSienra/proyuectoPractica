@@ -20,7 +20,7 @@ namespace Data.Entities
         [ForeignKey("Roles")]
         public int Id_Role { get; set; }
         public int Codigo { get; set; }
-        public string Clave { get; set; }
+        public string Password { get; set; }
         public bool Activo { get; set; }
         public Roles Roles { get; set; }
 
@@ -32,7 +32,7 @@ namespace Data.Entities
             newUser.Nombre = usuarioDTO.Nombre;
             newUser.Apellido = usuarioDTO.Apellido;
             newUser.Activo = usuarioDTO.Activo;
-            newUser.Clave = usuarioDTO.Clave;
+            newUser.Password = usuarioDTO.Password;
             newUser.Codigo = usuarioDTO.Codigo;
             newUser.Mail = usuarioDTO.Mail;
             newUser.Id_Role = usuarioDTO.Id_Role;

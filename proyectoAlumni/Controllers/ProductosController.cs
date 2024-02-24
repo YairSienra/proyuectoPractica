@@ -52,7 +52,7 @@ namespace Web.Controllers
                 
             productoDto.formFile = null;
 
-            baseApi.PostUsuario("Producto/GuardarProducto", productoDto);
+            baseApi.PostToApi("Producto/GuardarProducto", productoDto);
 
             return View("~/Views/Productos/Productos.cshtml");
         }
@@ -61,7 +61,7 @@ namespace Web.Controllers
         {
             var baseApi = new BaseApi(_httpClient);
 
-            baseApi.PostUsuario("Producto/EliminarProductos", productoDto);
+            baseApi.PostToApi("Producto/EliminarProductos", productoDto);
 
             return View("~/Views/Productos/Productos.cshtml");
         }

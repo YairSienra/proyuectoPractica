@@ -2,11 +2,7 @@
 using Data.DTO;
 using Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Data.Managers
 {
@@ -17,7 +13,12 @@ namespace Data.Managers
             return await contextoSingleton.Usuarios.Where(x => x.Activo !=false).Include(x => x.Roles).ToListAsync();
         }
 
-        public async Task<bool> Eliminar(UsuarioDTO usuarioDelete)
+		public async Task<Usuarios?> BuscarUsuario(string? mail, string? password)
+		{
+			return await contextoSingleton.Usuarios.Include(x => x.Roles).FirstOrDefaultAsync(x => x.Mail == mail && x.Password == password);
+		}
+
+		public async Task<bool> Eliminar(UsuarioDTO usuarioDelete)
         {
             var usuario =  await contextoSingleton.Usuarios.FirstOrDefaultAsync(x => x.IdUsuario == usuarioDelete.IdUsuario && x.Activo == true);
 
