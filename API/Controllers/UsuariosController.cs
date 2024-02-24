@@ -2,12 +2,14 @@
 using API.Servcices;
 using Data.DTO;
 using Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+	[Authorize]
+	[Route("api/[controller]")]
     public class UsuariosController : Controller
     {
         private readonly UsuariosService _service;
@@ -27,14 +29,14 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [Route("GuardarUsuario")]
+		[Route("GuardarUsuario")]
         public async Task<bool> GuardarUsuario(UsuarioDTO request)
         {
            return  await _service.Guardar(request);
         }
 
         [HttpPost]
-        [Route("EliminarUsuario")]
+		[Route("EliminarUsuario")]
         public async Task<bool> Guardar(UsuarioDTO usuario)
         {
             var lista = await _service.Eliminar(usuario);

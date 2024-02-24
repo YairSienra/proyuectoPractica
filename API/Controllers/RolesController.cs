@@ -1,12 +1,14 @@
 ﻿using API.Servcices;
 using Data.DTO;
 using Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+	[Authorize]
+	[Route("api/[controller]")]
     public class RolesController : Controller
     {
         private readonly RolesService _service;

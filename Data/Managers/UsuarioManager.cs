@@ -15,7 +15,7 @@ namespace Data.Managers
 
 		public async Task<Usuarios?> BuscarUsuario(string? mail, string? password)
 		{
-			return await contextoSingleton.Usuarios.FirstOrDefaultAsync(x => x.Mail == mail && x.Password == password);
+			return await contextoSingleton.Usuarios.Include(x => x.Roles).FirstOrDefaultAsync(x => x.Mail == mail && x.Password == password);
 		}
 
 		public async Task<bool> Eliminar(UsuarioDTO usuarioDelete)
