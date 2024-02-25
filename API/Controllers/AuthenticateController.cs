@@ -1,4 +1,5 @@
 ﻿using API.Servcices;
+using Commons.Helpers;
 using Data.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -27,6 +28,7 @@ namespace API.Controllers
         [Route("Login")]
         public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
+            loginDTO.Password = EncryptHelper.Encrypt(loginDTO.Password);
             var validarUsuario = await _usuarioService.BuscarUsuario(loginDTO);
 
             if (validarUsuario != null)

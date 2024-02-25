@@ -1,4 +1,5 @@
-﻿using Data.DTO;
+﻿using Commons.Helpers;
+using Data.DTO;
 using Data.Entities;
 using Data.Managers;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,7 @@ namespace API.Servcices
 		public async Task<bool> Guardar(UsuarioDTO request)
         {
             Usuarios usuarios = request;
-
+            usuarios.Password = EncryptHelper.Encrypt(usuarios.Password);
             return await _manager.Guardar(usuarios, usuarios.IdUsuario);
         }
 
