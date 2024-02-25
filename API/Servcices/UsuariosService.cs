@@ -15,10 +15,14 @@ namespace API.Servcices
         {
             _manager = new UsuarioManager();
         }
-        public  Task<List<Usuarios>> BuscarLista()
+        public  async Task<List<Usuarios>> BuscarLista()
         {
-            var lista = _manager.BuscarLista();
+            var lista = _manager.BuscarLista().Result;
 
+            //foreach (var x in lista)
+            //{
+            //    x.Password = EncryptHelper.DeCript(x.Password);
+            //}
             return  lista;
         }
 

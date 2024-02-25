@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [ApiController]
-	[Authorize]
 	[Route("api/[controller]")]
     public class RolesController : Controller
     {
@@ -27,6 +26,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("GuardarRol")]
         public async Task<bool> GuardarUsuario(RolesDTO request)
         {
@@ -34,7 +34,8 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [Route("EliminarRol")]
+		[Authorize]
+		[Route("EliminarRol")]
         public async Task<bool> Guardar(RolesDTO usuario)
         {
             var lista = await _service.Eliminar(usuario);

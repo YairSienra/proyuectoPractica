@@ -1,8 +1,8 @@
 ﻿
-let usuarios;
+let Usuarios;
 $(document).ready(function ()
 {
-        usuarios = $('#Usuarios').DataTable(
+        Usuarios = $('#Usuarios').DataTable(
         {
             ajax: {
                 url: 'https://localhost:7178/api/Usuarios/BuscarUsuarios',
@@ -10,7 +10,7 @@ $(document).ready(function ()
             },
             columns: [
                 {data: "idUsuario", title: "Id"},
-                { data: "nombre", Title: "Nombre" },
+                {data: "nombre", title : "Nombre"},
                 { data: "apellido", title: "Apellido" },
                 {
                     data: function (data)
@@ -86,9 +86,8 @@ function EliminarUsuario(data)
                         'El usuario fue eliminado',
                         'success'
                     )
-                    usuarios.ajax.reload()
+                    Usuarios.ajax.reload()
                 }
-                
             })
         }
     })

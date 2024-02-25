@@ -40,5 +40,29 @@ namespace Commons.Helpers
                 }
             }
         }
+
+        public static string DeCript(string Password)
+        {
+            byte[] passwordBytes = Encoding.UTF8.GetBytes(Password);
+
+            using (var aes = Aes.Create())
+            {
+                aes.Key = Encoding.UTF8.GetBytes(hash);
+                aes.IV = new byte[16];
+
+                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+
+                using (var ms = new MemoryStream(passwordBytes))
+                {
+                    using (var cryptoStream = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (var sw =new StreamReader(cryptoStream))
+                        {
+                            return sw.ReadToEnd();
+                        }
+                    }
+                }
+            }
+        }
     }
 }
