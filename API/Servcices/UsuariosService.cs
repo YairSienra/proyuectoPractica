@@ -17,13 +17,13 @@ namespace API.Servcices
         }
         public  async Task<List<Usuarios>> BuscarLista()
         {
-            var lista = _manager.BuscarLista().Result;
+            var lista = _manager.BuscarLista();
 
-            //foreach (var x in lista)
-            //{
-            //    x.Password = EncryptHelper.DeCript(x.Password);
-            //}
-            return  lista;
+            foreach (var x in lista.Result.ToList())
+            {
+                x.Password = EncryptHelper.Decrypt(x.Password);
+            }
+            return  lista.Result.ToList();
         }
 
 		public async Task<Usuarios?> BuscarUsuario(LoginDTO loginDTO)

@@ -11,7 +11,7 @@ $(document).ready(function ()
             columns: [
                 {data: "idUsuario", title: "Id"},
                 {data: "nombre", title : "Nombre"},
-                { data: "apellido", title: "Apellido" },
+                {data: "apellido", title: "Apellido"},
                 {
                     data: function (data)
                     {

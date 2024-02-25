@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [ApiController]
-	[Authorize]
 	[Route("api/[controller]")]
     public class ProductoController : Controller
     {
@@ -27,6 +26,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("GuardarProducto")]
         public async Task<bool> GuardarProducto(ProductosDTO request)
         {
@@ -34,6 +34,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("EliminarProductos")]
         public async Task<bool> GuardarEstado(ProductosDTO producto)
         {

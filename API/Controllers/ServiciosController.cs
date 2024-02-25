@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [ApiController]
-	[Authorize]
 	[Route("api/[controller]")]
     public class ServiciosController : Controller
     {
@@ -27,14 +26,16 @@ namespace API.Controllers
         }
 
         [HttpPost]
-		[Route("GuardarServicios")]
+        [Authorize]
+        [Route("GuardarServicios")]
         public async Task<bool> GuardarUsuario(ServiciosDTO request)
         {
             return await _service.Guardar(request);
         }
 
         [HttpPost]
-		[Route("EliminarServicios")]
+        [Authorize]
+        [Route("EliminarServicios")]
         public async Task<bool> Guardar(ServiciosDTO usuario)
         {
             var lista = await _service.Eliminar(usuario);

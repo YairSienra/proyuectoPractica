@@ -41,9 +41,9 @@ namespace Commons.Helpers
             }
         }
 
-        public static string DeCript(string Password)
+        public static string Decrypt(string encryptedPassword)
         {
-            byte[] passwordBytes = Encoding.UTF8.GetBytes(Password);
+            byte[] passwordBytes = Convert.FromBase64String(encryptedPassword);
 
             using (var aes = Aes.Create())
             {
@@ -56,7 +56,7 @@ namespace Commons.Helpers
                 {
                     using (var cryptoStream = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
                     {
-                        using (var sw =new StreamReader(cryptoStream))
+                        using (var sw = new StreamReader(cryptoStream))
                         {
                             return sw.ReadToEnd();
                         }

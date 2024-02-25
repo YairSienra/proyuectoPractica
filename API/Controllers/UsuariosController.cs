@@ -28,7 +28,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         [Route("GuardarUsuario")]
         public async Task<bool> GuardarUsuario(UsuarioDTO request)
         {
