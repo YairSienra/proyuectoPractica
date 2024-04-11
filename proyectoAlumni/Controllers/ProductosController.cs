@@ -1,10 +1,12 @@
 ﻿using Data.Base;
 using Data.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.ViewModels;
 
 namespace Web.Controllers
 {
+    [Authorize]
     public class ProductosController : Controller
     {
         public IActionResult Productos()

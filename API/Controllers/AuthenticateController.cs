@@ -42,7 +42,7 @@ namespace API.Controllers
 
                 var token = CreateToken(claims);
 
-                var reloadedToken = new JwtSecurityTokenHandler().WriteToken(token).ToString();
+                var reloadedToken = new JwtSecurityTokenHandler().WriteToken(token).ToString() + ";" + validarUsuario.Nombre + ";" + validarUsuario.Roles.Nombre;
 
 				return Ok(reloadedToken);
             }

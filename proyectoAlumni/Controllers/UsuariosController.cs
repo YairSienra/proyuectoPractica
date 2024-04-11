@@ -1,5 +1,6 @@
 ﻿using Data.Base;
 using Data.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -8,6 +9,7 @@ using Web.ViewModels;
 
 namespace Web.Controllers
 {
+    [Authorize]
     public class UsuariosController : Controller
     {
         private readonly IHttpClientFactory _httpClient;

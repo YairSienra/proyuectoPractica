@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,20 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient("useApi", config =>
 {
     config.BaseAddress = new Uri(builder.Configuration["ServiceUrl:ApiUrl"]);
+});
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    x.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, config =>
+{
+    config.Events.OnRedirectToLogin = context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        context.Response.Redirect(builder.Configuration["ServiceUrl:WebUrl"]);
+        return Task.CompletedTask;
+    };
 });
 
 var app = builder.Build();
@@ -26,7 +41,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
