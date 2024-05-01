@@ -1,3 +1,4 @@
+using Data.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 
@@ -6,6 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+var urlForCors = "myPolicy";
+builder.Services.AddCors(options => options.AddPolicy(name: urlForCors, builder =>
+{
+    builder.AllowAnyOrigin().AllowAnyMethod();
+}));
 
 builder.Services.AddHttpClient("useApi", config =>
 {
@@ -26,6 +32,8 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
+builder.Services.AddSession();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -44,6 +52,9 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseCors(urlForCors);
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
