@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [ApiController]
-	[Authorize]
 	[Route("api/[controller]")]
+    [Authorize]
     public class UsuariosController : Controller
     {
         private readonly UsuariosService _service;
@@ -29,14 +29,16 @@ namespace API.Controllers
         }
 
         [HttpPost]
-		[Route("GuardarUsuario")]
+        //[Authorize]
+        [Route("GuardarUsuario")]
         public async Task<bool> GuardarUsuario(UsuarioDTO request)
         {
            return  await _service.Guardar(request);
         }
 
         [HttpPost]
-		[Route("EliminarUsuario")]
+        [Authorize]
+        [Route("EliminarUsuario")]
         public async Task<bool> Guardar(UsuarioDTO usuario)
         {
             var lista = await _service.Eliminar(usuario);

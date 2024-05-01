@@ -1,3 +1,5 @@
+using Data.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,11 +7,32 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+var urlForCors = "myPolicy";
+builder.Services.AddCors(options => options.AddPolicy(name: urlForCors, builder =>
+{
+    builder.AllowAnyOrigin().AllowAnyMethod();
+}));
 
 builder.Services.AddHttpClient("useApi", config =>
 {
     config.BaseAddress = new Uri(builder.Configuration["ServiceUrl:ApiUrl"]);
 });
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    x.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, config =>
+{
+    config.Events.OnRedirectToLogin = context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        context.Response.Redirect(builder.Configuration["ServiceUrl:WebUrl"]);
+        return Task.CompletedTask;
+    };
+});
+
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -26,7 +49,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCors(urlForCors);
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

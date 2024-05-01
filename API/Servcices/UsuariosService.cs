@@ -1,4 +1,5 @@
-﻿using Data.DTO;
+﻿using Commons.Helpers;
+using Data.DTO;
 using Data.Entities;
 using Data.Managers;
 using Microsoft.AspNetCore.Mvc;
@@ -14,11 +15,15 @@ namespace API.Servcices
         {
             _manager = new UsuarioManager();
         }
-        public  Task<List<Usuarios>> BuscarLista()
+        public  async Task<List<Usuarios>> BuscarLista()
         {
             var lista = _manager.BuscarLista();
 
-            return  lista;
+            foreach (var x in lista.Result.ToList())
+            {
+                x.Password = EncryptHelper.Decrypt(x.Password);
+            }
+            return  lista.Result.ToList();
         }
 
 		public async Task<Usuarios?> BuscarUsuario(LoginDTO loginDTO)
@@ -31,7 +36,7 @@ namespace API.Servcices
 		public async Task<bool> Guardar(UsuarioDTO request)
         {
             Usuarios usuarios = request;
-
+            usuarios.Password = EncryptHelper.Encrypt(usuarios.Password);
             return await _manager.Guardar(usuarios, usuarios.IdUsuario);
         }
 

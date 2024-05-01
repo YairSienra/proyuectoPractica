@@ -1,5 +1,7 @@
 ﻿using API.Servcices;
+using Commons.Helpers;
 using Data.DTO;
+using Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -27,20 +29,22 @@ namespace API.Controllers
         [Route("Login")]
         public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
+            loginDTO.Password = EncryptHelper.Encrypt(loginDTO.Password);
             var validarUsuario = await _usuarioService.BuscarUsuario(loginDTO);
 
             if (validarUsuario != null)
             {
                 var claims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Email, validarUsuario.Mail),
+                    new Claim(ClaimTypes.Email, validarUsuario.Nombre),
                     new Claim(ClaimTypes.DateOfBirth, validarUsuario.Fecha_Nacimiento.ToString()),
-                    new Claim(ClaimTypes.Role, validarUsuario.Roles.Nombre)
+                    new Claim(ClaimTypes.Role, validarUsuario.Roles.Nombre),
+                    new Claim(ClaimTypes.Email, validarUsuario.Mail),
                 };
 
                 var token = CreateToken(claims);
 
-                var reloadedToken = new JwtSecurityTokenHandler().WriteToken(token).ToString();
+                var reloadedToken = new JwtSecurityTokenHandler().WriteToken(token).ToString() + ";" + validarUsuario.Nombre + ";" + validarUsuario.Roles.Nombre + ";" + validarUsuario.Mail;
 
 				return Ok(reloadedToken);
             }
