@@ -10,7 +10,7 @@ $(document).ready(function ()
             ajax: {
                 url: `${ajaxUrl}Usuarios/BuscarUsuarios`,
                 dataSrc: '',
-                headers: { "Authorization": " Bearer " + token }
+                headers: { "Authorization": "Bearer " + token }
             },
             columns: [
                 {data: "idUsuario", title: "Id"},

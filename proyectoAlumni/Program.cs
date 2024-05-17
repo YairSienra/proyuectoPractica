@@ -10,7 +10,7 @@ builder.Services.AddControllersWithViews();
 var urlForCors = "myPolicy";
 builder.Services.AddCors(options => options.AddPolicy(name: urlForCors, builder =>
 {
-    builder.AllowAnyOrigin().AllowAnyMethod();
+    builder.AllowAnyOrigin().AllowAnyMethod().WithOrigins("http://localhost:5191");
 }));
 
 builder.Services.AddHttpClient("useApi", config =>
@@ -43,7 +43,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+app.UseCors(urlForCors);
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -52,7 +52,6 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCors(urlForCors);
 
 app.UseSession();
 
